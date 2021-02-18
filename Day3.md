@@ -536,3 +536,92 @@ lambda x,y:x+y
 
 ```
 
+
+
+
+
+Day21 
+
+```python
+'''
+包是一個有包含有__init__.py文件的文件夾，是模塊的一種形式，包被用來當作模塊導入
+mmm
+  -- __init__.py
+  
+1. 產生一個名稱空間
+2. 運行包下的__init__.py文件，將運行過程中產生的名字都丟到1的名稱空間中
+3. 在當前執行文件的名稱空間中拿到一個名字mmm, mmm指向1的名稱空間
+'''
+import mmm
+
+'''
+在__init__.py 加
+絕對導入: 以包的文件夾作為起始來進行導入
+from foo.m1 import f1
+from foo.m2 import f2
+from foo.m3 import f3
+'''
+
+```
+
+Day22
+
+```python
+import time
+# 1. timestamp
+# 用於時間間隔的計算
+print(time.time())
+
+# 2. 按照格式顯示的時間
+# 用於顯示時間
+print(time.strftime('%Y-%m-%d %H:%M:%S %p'))
+
+# 3. 結構化時間
+# 可以單獨獲取時間的某部分
+res = time.localtime()
+print(res)
+print(res.tm_year)
+print(res.tm_yday)
+
+# datetime
+import datetime
+print(datetime.datetime.now() + datetime.timedelta(days=3))
+
+# 操作
+#1. 時間格式的轉換
+# struct_time -> timestamp
+s_time=time.localtime()
+print(time.mktime(s_time))
+
+# timestamp -> struct_time 
+time.localtime(time.time())
+
+# GMT+8
+time.localtime()
+# GMT+0
+time.gmtime()
+
+
+#struct_time -> format time
+s_time = time.localtime()
+time.strftime('%Y-%m-%d %H:%M:%S', s_time)
+
+# format time  ->struct_time
+1988-03-03 11:11:11
+time.strfttime('1988-03-03 11:11:11', '%Y-%m-%d %H:%M:%S')
+
+# format string -->  struct_time --> timestamp
+# 1988-03-03 11:11:11
+
+struct_time = time.strfttime('1988-03-03 11:11:11', '%Y-%m-%d %H:%M:%S')
+timestamp = time.mktime(struct_time) + 7 * 86400
+print(timestamp)
+
+# format string <--  struct_time <-- timestamp
+res = time.strfttime('%Y-%m-%d %H:%M:%S', time.localtime(timestamp))
+print(res)
+
+
+
+```
+
