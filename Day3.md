@@ -536,3 +536,73 @@ lambda x,y:x+y
 
 ```
 
+```python
+'''
+模塊: 一系列功能的集合體
+1. 內置模塊
+2. 第三方模塊
+3. 自定義的模塊
+ ex: 一個python文件，文件名m.py 模塊名就叫m
+'''
+import foo
+# 1. 執行foo.py
+# 2. 產生foo.py 的名稱空間, 將foo.py運行過程中產生的名字都丟到foo的名稱空間中
+# 3. 在當前文件中產生一個名字foo，並且指向2中所產生的名稱空間
+
+# 引用: 模塊名.名字
+foo.x
+foo.get()
+
+# 導入模塊方式
+import time, foo, m 
+import foo as f
+f.x
+
+
+```
+
+Day21
+
+```python
+'''
+1. 文件被作為模塊導入
+print(__name__) # 文件名
+2. 若是文件直接被執行
+print(__name__) # __main__
+'''
+
+# import 導入模塊的優缺點
+# 優點:必須加前綴，部會與當前名稱空間的變數衝突
+# 缺點: 加前綴麻煩
+import foo
+foo.x
+
+# from .. import...
+'''
+1. 產生一個模塊的名稱空間
+2. 運行foo.py，將運行過程中產生的名子丟到模塊的名稱空間中
+3. 在當前名稱空間拿到一個名字，該名字指向 模塊空間中的某一個內存地址
+
+優點:不用加前綴
+缺點:容易與當前名稱空間混淆
+'''
+from foo import x
+from foo import get
+
+'''
+優先級
+1. 內存 (內置模塊)
+2. 依照sys.path中存放文件的順序依次去找要導入的模塊
+'''
+import sys
+# 值為一個列表，其中第一個文件夾是當前執行文件所在的文件夾
+print(sys.path)
+
+#查看在內存中的模塊
+print(sys.modules)
+```
+
+
+
+
+
