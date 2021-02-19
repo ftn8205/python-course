@@ -693,4 +693,43 @@ item [1,3,5,7,9]
 random.shuffle(item) #打亂item的順序
 ```
 
+```python
+import sys
+
+# python run.py 1 2 3
+print(sys.argv) # ['run.py','1','2','3']
+```
+
+Day 23 
+
+```python
+# 序列化: 把內存的數據類型轉換成一個特定的格式的內容
+# 該格式可以用來存儲或者傳輸給其他平台使用
+
+# 內存的數據類型 --> 序列化 --> 特定的格式 (Json)
+
+import json
+
+res = json.dumps(True) 
+print(res) # true
+
+json_res = json.dumps([1,"aaa", True]) # 序列化
+print(json_res) # [1,"aaa", true]  (str)
+
+l = json.loads(json_res) # 反序列化
+print(l) # [1,"aaa", True]  (list)
+
+# 將序列化的結果寫入文件
+with open('test.json',mode='wt',encoding='utf-8') as f:
+  json.dump([1,'aaa',True], f)
+
+
+# 從文件讀取json格式，並反序列化
+with open('test.json',mode='rt',encoding='utf-8') as f:
+  l = json.load(f)
+  print(l)
+  
+# json格式只能兼容所有語言通用的數據類型，不能識別某一語言的獨有類型
+
+```
 
