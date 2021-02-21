@@ -733,3 +733,89 @@ with open('test.json',mode='rt',encoding='utf-8') as f:
 
 ```
 
+```python
+'''
+hash: sha1, sha256
+傳入內容一樣得到的hash就一樣
+不能由hash反解回原來的密碼
+經由一樣的hash算法出來的hash值長度是一樣的
+'''
+import hashlib
+m = hashlib.sha256('hello'.encode('utf-8'))
+res=m.hexdigest()
+print(res)
+
+# 猜密碼
+cryptograph='2132sdsdsdwedfereer'
+
+passwd = [
+    'alex123',
+    'alex2222',
+    'alex5566'
+]
+dic= {}
+
+for p in passwds:
+    res = hashlib.md5(p.encode('utf-8'))
+    dic[p]=res.hexdigest()
+print(dic)
+
+for k,v in dic.items():
+    if v == cryptograph:
+        print('password is %s' %k)
+        break
+
+# 密碼加鹽
+
+        
+
+```
+
+Day 27
+
+物件是一個容器，用來盛放資料和功能
+
+```python
+'''
+物件是一個容器，用來盛放資料和功能
+類也是一個容器，該容器用來存放物件共有的資料和功能 
+'''
+# 先定義類
+# 類在定義階段就運行了，會產生一個類的名稱空間
+class Student:
+    # 資料
+    stu_school = 'NTHU'
+    
+    # 初始化的函數，在類調用時會自動執行
+    def __init__(obj,x,y,z):
+        obj.stu_name=x
+        obj.stu_age=y
+        obj.stu_gender=z
+    
+    # 功能
+    def tell_stu_info(name):
+        print(name)
+    def set_info(name):
+        print(name)
+
+# 屬性訪問的語法
+print(Student.stu_school)
+print(Student.set_info)
+
+
+# 調用類產生對象(實例化)
+# 讓類跟物件產生關聯
+# 1. 先產生一個空物件
+# 2. python會自動調用類中的__init__方法，然後將空對象傳入__inin__的參數中
+# 3. 返回初始化好的對象
+stu1_obj = Student('Ian',18,'male') 
+#  Student.__init__(stu1_obj, 'Ian',18,'male') 
+stu2_obj = Student('Tom',18,'male')
+print(stu1_obj.stu_name)
+print(stu1_obj.stu_age)
+print(stu1_obj.stu_gender)
+print(stu1_obj.stu_school)
+
+
+```
+
