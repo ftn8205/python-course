@@ -793,10 +793,13 @@ class Student:
         obj.stu_gender=z
     
     # 功能
-    def tell_stu_info(name):
-        print(name)
-    def set_info(name):
-        print(name)
+    def tell_stu_info(obj):
+        print(obj.stu_name)
+        
+    def set_info(obj,x,y,z):
+        obj.stu_name=x
+        obj.stu_age=y
+        obj.stu_gender=z
 
 # 屬性訪問的語法
 print(Student.stu_school)
@@ -808,9 +811,10 @@ print(Student.set_info)
 # 1. 先產生一個空物件
 # 2. python會自動調用類中的__init__方法，然後將空對象傳入__inin__的參數中
 # 3. 返回初始化好的對象
-stu1_obj = Student('Ian',18,'male') 
-#  Student.__init__(stu1_obj, 'Ian',18,'male') 
-stu2_obj = Student('Tom',18,'male')
+
+stu1_obj = Student('Ian',18,'male')  #  Student.__init__(stu1_obj, 'Ian',18,'male') 
+stu2_obj = Student('Tom',20,'male')
+
 print(stu1_obj.stu_name)
 print(stu1_obj.stu_age)
 print(stu1_obj.stu_gender)
