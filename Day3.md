@@ -823,3 +823,131 @@ print(stu1_obj.stu_school)
 
 ```
 
+Day 24 
+
+```python
+'''
+將封裝的屬性進行隱藏操作(在屬性名前加__前綴)
+'''
+class Foo:
+    __x = 1
+    
+    def __f1(self):
+        print('aa')
+    def f2(self): 
+        print(self.__x)
+        
+print(Foo.__x) # 在類的外面調用不到
+obj = Foo()
+obj.f2()  # 這樣可以調用得到
+----------------------------------------
+class Foo:
+    __x = 1
+    
+    def __init__(self,name,age):
+        self.__name = name
+        self.__age = age
+        
+obj = Foo('egon', 18)
+print(obj.name, obj.age) # 調用不到
+```
+
+Day29
+
+```python
+'''
+property是一個裝飾器
+'''
+class People:
+    def __init__(self, name, height, weight):
+        self.name = name,
+        self.weight = weight,
+        self.height = height
+    @property
+    def bmi(self):
+        return self.weight / (self.height ** 2)
+        
+        
+obj1 = People('egon', 180, 70)
+obj1.bmi()
+obj1.bmi  # 加了property讓他看起來很像是變數
+
+
+
+class People:
+    def __init__(self, name):
+        self.__name = name
+    def get_name(self): 
+        return self.__name
+    def set_name(self, val):
+        if type(val) is not str:
+            print('fail')
+            return
+        self.__name = val
+    def del_name(self):
+        print('cannot delete')
+    
+    name = property(get_name. set_name, del_name)
+        
+obj1 = People('egon')
+print(obj1.get_name())
+obj1.set_name('EEE')
+print(obj1.get_name())
+# 加了property讓他看起來很像是變數
+obj1.name # get_name
+obj1.name = 'EGON'  # 可以set_name
+del obj1.name   # 不能刪除
+
+
+# 3
+class People:
+    def __init__(self, name):
+        self.__name = name
+        
+    @property    
+    def name(self): 
+        return self.__name
+    
+    @name.setter
+    def name(self, val):
+        if type(val) is not str:
+            print('fail')
+            return
+        self.__name = val
+        
+    @name.deleter
+    def name(self):
+        print('cannot delete')
+
+        
+obj1 = People('egon')
+# 加了property讓他看起來很像是變數
+obj1.name # get_name
+obj1.name = 'EGON'  # 可以set_name
+del obj1.name   # 不能刪除
+```
+
+```python
+'''
+python 支援多繼承
+如果沒有繼承東西, 默認繼承object
+繼承用來解決類與類之間代碼冗餘問題
+優點: 子類可以同時遺傳多個父類<的屬性,最大限度的重用代碼
+缺點: 
+違背人的思維習慣: 繼承表達的是一種 "是" 的關係
+可讀性變差(要找很多個父類才找得到想要的變數或功能)
+不建議使用多繼承，會造成菱形問題
+'''
+class Parent1:
+
+class Parent2:
+
+class Sub1(Parent1):
+    
+class Sub2(Parent1,Parent2):
+```
+
+```
+
+```
+
