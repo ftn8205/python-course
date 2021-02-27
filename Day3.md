@@ -947,7 +947,48 @@ class Sub1(Parent1):
 class Sub2(Parent1,Parent2):
 ```
 
-```
+Day 33
 
+Python是動態語言，反射(reflection)機制是動態語言的關鍵
+
+反射是指在程式運行狀態中，對於任何一個類，都知道這個類的所有屬性與方法
+
+對象則能夠調用他的任意方法和屬性
+
+實現反射的步驟
+
+1. 先通過dir，啥看某一個對象下可以.出哪些屬性
+   `print(dir(obj))`
+2. 可以通過字串反射到真正的屬性上，得到屬性值
+   obj.'name' 
+
+四個內置函數的使用: 通過字串來操作屬性值
+
+1. hasattr(): print(hasattr(obj, 'name'))
+2. getattr(): print(getattr(obj, 'name'))
+3. setattr(): print(getattr(obj, 'name','Ian'))
+4. delattr() delattr(obj,'name')  print(obj.__dict__)
+
+內置方法: 在類的內部，以_ _開頭，以_ _ _結尾，在某些情況下會自動調用
+
+```python
+'''
+__str__: 在print時自動觸發
+__del__: 在清理對象時觸發
+'''
+
+# 元類 ---> 實例化 ---> 類 (People)---> 實例化 --> object (obj)
+
+print(type(People))
+
+'''
+class關鍵字造類的步驟
+類有三大特性
+1.類名
+2.類的父類
+3.執行類體代碼拿到類的名稱空間
+exec(class_body,{},class_dic)
+4.調用元類
+'''
 ```
 
