@@ -5,6 +5,7 @@ phone = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # 0.0.0.0 => 可以被任何人訪問到
 #綁定手機卡
+phone.setsockopt(socket.SOL_SOCKET,socket.SO_REUSEADDR,1)
 phone.bind(('127.0.0.1', 9999))
 
 #開機
@@ -28,7 +29,7 @@ while True:
 			
 			conn.send(data.upper())
 		except Exception:
-			break;
+			break
 
 
 
