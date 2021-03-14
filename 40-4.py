@@ -18,6 +18,7 @@ server.listen(5)
 
 # 將服務代碼封裝程函數
 def talk(conn):
+	
 	# 通訊循環
 	while True:
 		try:
@@ -41,7 +42,7 @@ def talk(conn):
 while True:
 	conn, addr = server.accept()  # 接客
 
-	#叫其他人來服務客戶，用進程線程都可以
+	# 叫其他人來服務客戶，用Process，Thread都可以
 	t = Thread(target=talk, args=(conn,))
 	# t = Process(target=talk, args=(conn,))
 	t.start()
