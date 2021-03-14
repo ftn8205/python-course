@@ -402,10 +402,11 @@ def auth(db_type):
       else:
         print('not support!')
     return wrapper
+  return deco
+  
 
-
-@auth(db_type='file') 
 # 先跑auth(db_type='file') 會變成 => @deco => index=deco(index) => wrapper
+@auth(db_type='file') 
 def index(x,y):
 	print(x,y)
   
@@ -416,8 +417,8 @@ index(1,2)
 def deco(x):
   def outter(func):
     def wrapper(*args,**kwargs):
-      # 1. 調用原函數
-      # 2. 新增新功能
+      # 1. 在此調用原函數
+      # 2. 然後新增新功能
       res = func(*args, **kwargs)
       return res
   	return wrapper
@@ -820,12 +821,131 @@ print(stu1_obj.stu_age)
 print(stu1_obj.stu_gender)
 print(stu1_obj.stu_school)
 
-
+Day 30
 ```
 
+```python
+'''
+mixins機制:在多繼承背景下盡可能地提升多繼承的可讀性
+'''
+class Vehicle:
+  pass
+class FlyableMixin:
+  pass
+
+class Aircraft(FlyableMixin, Vehicle):
+  pass
+
+class Helicopter(FlyableMixin, Vehicle):
+  pass
+class Car(Vehicle):
+  pass
+
+
+# 子類要用到父類的init方式
+
+# 1
+class People():
+  def __init__(self, name, age):
+    self.name = name,
+    self.age = age
+
+class Teacher(People):
+  def __init__(self, name,age,level):
+    People.__init__(self,name,age,sex)
+    
+    self.level = level
+    
+teacher_obj = Teacher('Ian', 18, 'high')
+
+# 2: super 會得到一個對象，該對象會參照目前類的mro,去當前的父類找屬性
+class People():
+  def __init__(self, name, age):
+    self.name = name,
+    self.age = age
+
+class Teacher(People):
+  def __init__(self, name,age,level):
+    super().__init__(name,age,sex)
+    
+    self.level = level
+    
+teacher_obj = Teacher('Ian', 18, 'high')
+
+
+# 多型: 同一種事物有多種型態
+import abc
+class Animal(metaclass=abc.ABCMeta): #統一所有子類別的標準
+  
+  @abc.abstractmethod  # 強制子類別一定要有say方法
+  def say(self):
+    print("voice")
+
+# obj = Animal() 不能實例化抽象類
+
+
+class People(Animal):
+  def say(self):
+    super().say()
+    print('ahahahah')
+    
+class Dog(Animal):
+  def say(self):
+    super().say()
+    print('wangwang')
+    
+obj1 = People()
+obj2 = Dog()
+obj3 = Pig()
+
+obj1.say()
+obj2.say()
+obj3.say()
+    
+
+'''
+綁定方法: 可以將調用者本身以第一個參數傳入
+1. 綁定給對象的方法
+2. 綁定給類的方法
+'''
+import settings
+class Mysql:
+  def __init__(self,ip,port):
+    self.ip = ip
+    self.port = port
+  
+  @classmethod # 將下列函數裝飾成綁定給類的內容，通常用來造物件
+  def from_conf(cls):
+    return cls(settings.IP, settings.PORT)
+    
+obj1 = Mysql('127.0.0.1', 3306) # 傳入物件的方式來造物件
+
+obj2 = Mysql.from_conf() # 傳入類的方式來造物件
+
+'''
+非綁定方法: 靜態方法
+調用者可以是類或物件
+''' 
+
+class Mysql:
+  def __init__(self,ip,port):
+    self.ip = ip
+    self.port = port
+    
+  @staticmethod 
+  def create_id():
+    import uuid
+    return uuid.uuid4()
+    
+obj1 = Mysql('127.0.0.1', 3306) # 傳入物件的方式來造物件
+
+Mysql.create_id()
+obj1.create_id()
+
+=======
 Day 24 
 
-```python
+​```python
 '''
 將封裝的屬性進行隱藏操作(在屬性名前加__前綴)
 '''
