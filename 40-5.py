@@ -8,7 +8,7 @@ def task(name):
 
 
 if __name__ == '__main__':
-	t = Thread(target=task, args=('egon',))
+	t = Thread(target=task, args=('ian',))
 	t.start()
 	t.join()
 	print('Main')

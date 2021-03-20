@@ -1112,3 +1112,75 @@ exec(class_body,{},class_dic)
 '''
 ```
 
+Day 42
+
+```
+網路IO模型有
+blocking IO
+nonblocking IO
+IO multiplexing
+asynchronous IO
+
+接受方做的事情
+1. 等待對方傳資料來
+2. 將資料從作業系統拷貝到進程中
+
+常見的網路阻塞狀態
+accept
+recv
+recvfrom
+```
+
+ 
+
+recv
+
+![image-20210316210130725](image-20210316210130725.png)
+
+### 阻塞IO
+
+![image-20210316210855837](/Users/ian_ke/Desktop/Ian/python-course/image-20210316210855837.png)
+
+之前學的都是阻塞IO模型
+
+在服務端開設多進程多線程還是沒辦法解決IO問題，只不過是多個人等待彼此互不干擾
+
+### 非阻塞IO
+
+  ![image-20210316212037359](/Users/ian_ke/Desktop/Ian/python-course/image-20210316212037359.png)
+
+不會進入阻塞態(只在就緒態和運行態)，雖然在等待的時間可以做其他事情，但它會長時間佔著CPU (因為沒有阻塞)。
+
+
+
+### IO多路複用
+
+![image-20210316215446864](/Users/ian_ke/Desktop/Ian/python-course/image-20210316215446864.png)
+
+
+
+當監管的對象只有一個時，其實IO多路複用的效率連IO阻塞都比不上，
+
+但是IO多路複用可以一次性監管很多對象。
+
+```
+server = socket.socket()
+conn, addr = server.accept()
+```
+
+
+
+監管機制(select)是作業系統本身的，如果想要用就得導入select模塊
+
+
+
+### 異步IO
+
+![image-20210316222139781](/Users/ian_ke/Desktop/Ian/python-course/image-20210316222139781.png)
+
+所有模型中效率最高的，也是使用最廣泛的
+
+模塊: asyncio
+
+框架: sanic, tronado, twisted
+

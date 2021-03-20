@@ -1,4 +1,4 @@
-# 搶鎖時必須要釋放鎖,在操作鎖時很容易遭成死鎖(程市卡死 阻塞)
+# 搶鎖時必須要釋放鎖,在操作鎖時很容易遭成死鎖(程式卡死 阻塞)
 
 from threading import Thread, Lock
 import time
@@ -6,7 +6,7 @@ import time
 mutexA = Lock()
 mutexB = Lock()
 
-#false
+# false
 # 類只要加括號多次，產生的就是不同的對象
 # 如果想要實現加多次括號得到相同的對象 用 單例模式 (Singeton???)
 

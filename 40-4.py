@@ -9,24 +9,20 @@ from multiprocessing import Process
 	3. 能夠支持併發
 """
 
-server = socket.socket() #default TCP
+server = socket.socket() # default TCP
 
 server.bind(('127.0.0.1',8080))
 
 server.listen(5)
 
 
-# 將服務代碼封裝程函數
+# 將Thread需要做的功能寫成函數
 def talk(conn):
 	
 	# 通訊循環
 	while True:
 		try:
 			data = conn.recv(1024)
-
-			# 針對 mac linux
-			if len(data) == 0:
-				break
 
 			print(data.decode('utf-8'))
 			conn.send(data.upper())
@@ -40,10 +36,11 @@ def talk(conn):
 
 # 鏈結循環
 while True:
-	conn, addr = server.accept()  # 接客
+	conn, addr = server.accept()  # 等待Client端連進來
 
 	# 叫其他人來服務客戶，用Process，Thread都可以
 	t = Thread(target=talk, args=(conn,))
 	# t = Process(target=talk, args=(conn,))
+
 	t.start()
 

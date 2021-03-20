@@ -37,8 +37,8 @@ for i in range(20): #朝池子中提交20個任務
 	t_list.append(res)
 
 
-#等待線程池中所有任務都執行完後才往下執行 
-pool.shutdown() # 關閉現城池 等待線程池中所有任務運行完畢
+# 等待線程池中所有任務都執行完後才往下執行 
+pool.shutdown() # 關閉線程池 等待線程池中所有任務運行完畢
 
 for t in t_list:
 	print('>>>>> ',t.result()) # 是有序的

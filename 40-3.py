@@ -22,22 +22,22 @@ print("Main")
 
 
 
-#方法二
+# #方法二
 
-class MyThread(Thread):
-	def __init__(self, name):
-		# 如果要重寫別人的方法，但不知道別的方法裡面有啥，就先調用父類的方法
-		super().__init__()
-		self.name = name
-
-
-	def run(self):
-		print("%s is running" %self.name)
-		time.sleep(1)
-		print('END')
+# class MyThread(Thread):
+# 	def __init__(self, name):
+# 		# 如果要重寫別人的方法，但不知道別的方法裡面有啥，就先調用父類的方法
+# 		super().__init__()
+# 		self.name = name
 
 
-if __name__ == '__main__':
-	t = MyThread('egon')
-	t.start()
-	print('Main')
+# 	def run(self):
+# 		print("%s is running" %self.name)
+# 		time.sleep(1)
+# 		print('END')
+
+
+# if __name__ == '__main__':
+# 	t = MyThread('egon')
+# 	t.start()
+# 	print('Main')
